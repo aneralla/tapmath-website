@@ -27,12 +27,15 @@ class TapMathTree {
             const treeResponse = await fetch('./tree-structure.json');
             const treeData = await treeResponse.json();
             this.treeStructure = treeData.treeStructure;
+            console.log('Loaded tree structure:', this.treeStructure);
 
             // Load math concepts
             const conceptsResponse = await fetch('./math-concepts.json');
             const conceptsData = await conceptsResponse.json();
             this.mathConcepts = conceptsData.mathConcepts;
+            console.log('Loaded math concepts:', this.mathConcepts);
         } catch (error) {
+            console.error('Error loading data:', error);
             throw new Error('Failed to load configuration files');
         }
     }
@@ -272,26 +275,36 @@ class TapMathTree {
     }
 
     isConceptUnlocked(conceptId, layerId) {
+        console.log(`Checking unlock for ${conceptId} in layer ${layerId}`);
+        console.log('Tree structure progression:', this.treeStructure.progression);
+        
         // Check if unlock system is disabled
         if (!this.treeStructure.progression.unlockSystem) {
+            console.log('Unlock system disabled - unlocking all concepts');
             return true; // All concepts unlocked when system is disabled
         }
         
         // Always unlock roots concepts
-        if (layerId === 'roots') return true;
+        if (layerId === 'roots') {
+            console.log('Roots layer - always unlocked');
+            return true;
+        }
         
         // Check if prerequisite checking is disabled
         if (!this.treeStructure.progression.prerequisiteCheck) {
+            console.log('Prerequisite check disabled - unlocking all concepts');
             return true; // All concepts unlocked when prerequisite check is disabled
         }
         
         const completed = this.userProgress.completed || [];
+        console.log('Completed concepts:', completed);
         
         // For trunk concepts, check if enough root concepts are completed
         if (layerId === 'trunk') {
             const rootsCompleted = this.mathConcepts.roots.filter(concept => 
                 completed.includes(concept.id)
             ).length;
+            console.log(`Trunk unlock check: ${rootsCompleted}/4 roots completed`);
             return rootsCompleted >= 4; // Need 4 roots concepts completed
         }
         
@@ -300,6 +313,7 @@ class TapMathTree {
             const trunkCompleted = this.mathConcepts.trunk.filter(concept => 
                 completed.includes(concept.id)
             ).length;
+            console.log(`Branches unlock check: ${trunkCompleted}/6 trunk completed`);
             return trunkCompleted >= 6; // Need 6 trunk concepts completed
         }
         
