@@ -61,41 +61,41 @@ class TapMathTree {
         const positions = [];
         
         if (layerId === 'roots') {
-            // Position concepts along the root system (underground)
+            // Position concepts along the root system with better spacing
             const rootPositions = [
-                { x: 300, y: 740 }, { x: 400, y: 760 }, { x: 500, y: 720 },
-                { x: 600, y: 760 }, { x: 700, y: 740 }, { x: 180, y: 755 }
+                { x: 200, y: 740 }, { x: 350, y: 760 }, { x: 500, y: 730 },
+                { x: 650, y: 760 }, { x: 800, y: 740 }, { x: 325, y: 780 }
             ];
             
             for (let i = 0; i < Math.min(conceptCount, rootPositions.length); i++) {
                 positions.push({
                     x: rootPositions[i].x,
                     y: rootPositions[i].y,
-                    radius: 30
+                    radius: 25
                 });
             }
         } else if (layerId === 'trunk') {
-            // Position concepts along the trunk and lower branches
+            // Position concepts along the trunk with proper vertical spacing
             const trunkPositions = [
-                { x: 450, y: 650 }, { x: 550, y: 650 }, { x: 420, y: 600 }, { x: 580, y: 600 },
-                { x: 470, y: 550 }, { x: 530, y: 550 }, { x: 400, y: 500 }, { x: 600, y: 500 }
+                { x: 460, y: 680 }, { x: 540, y: 670 }, { x: 450, y: 620 }, { x: 550, y: 610 },
+                { x: 470, y: 560 }, { x: 530, y: 570 }, { x: 440, y: 510 }, { x: 560, y: 520 }
             ];
             
             for (let i = 0; i < Math.min(conceptCount, trunkPositions.length); i++) {
                 positions.push({
                     x: trunkPositions[i].x,
                     y: trunkPositions[i].y,
-                    radius: 28
+                    radius: 23
                 });
             }
         } else if (layerId === 'branches') {
-            // Position concepts at branch endpoints and junctions
+            // Position concepts strategically on branches with better spacing
             const branchPositions = [
-                // Top level branches and twigs
-                { x: 460, y: 250 }, { x: 540, y: 250 }, { x: 280, y: 200 }, { x: 720, y: 200 },
-                // Mid level branches
-                { x: 420, y: 270 }, { x: 580, y: 270 }, { x: 330, y: 220 }, { x: 670, y: 220 },
-                // Branch junctions
+                // Upper branches - spread out more
+                { x: 480, y: 280 }, { x: 520, y: 280 }, { x: 280, y: 200 }, { x: 720, y: 200 },
+                // Mid-level branches - wider spread
+                { x: 300, y: 250 }, { x: 700, y: 250 }, { x: 420, y: 270 }, { x: 580, y: 270 },
+                // Lower branch junctions - better aligned
                 { x: 380, y: 320 }, { x: 620, y: 320 }
             ];
             
@@ -103,7 +103,7 @@ class TapMathTree {
                 positions.push({
                     x: branchPositions[i].x,
                     y: branchPositions[i].y,
-                    radius: 26
+                    radius: 22
                 });
             }
         }
@@ -124,10 +124,10 @@ class TapMathTree {
         const status = this.getConceptStatus(concept.id, layer.id);
         group.classList.add(status.class);
         
-        // Calculate dynamic radius based on text length
+        // Calculate dynamic radius based on text length with better proportions
         const baseRadius = position.radius;
         const titleLength = concept.title.length;
-        const dynamicRadius = Math.max(baseRadius, Math.min(titleLength * 2 + 15, baseRadius + 15));
+        const dynamicRadius = Math.max(baseRadius, Math.min(titleLength * 1.5 + 12, baseRadius + 10));
         
         // Create circle background
         const circle = document.createElementNS(svgNS, 'circle');
@@ -146,23 +146,23 @@ class TapMathTree {
         circle.setAttribute('stroke', '#4CAF50');
         circle.setAttribute('stroke-width', '2');
         
-        // Create icon text
+        // Create icon text - positioned in upper part of circle
         const icon = this.getConceptIcon(concept);
         const iconText = document.createElementNS(svgNS, 'text');
         iconText.classList.add('concept-icon-svg');
         iconText.setAttribute('x', position.x);
-        iconText.setAttribute('y', position.y - 8);
+        iconText.setAttribute('y', position.y - 6);
         iconText.textContent = icon;
         
-        // Create title text with better wrapping
+        // Create title text with better wrapping - positioned in lower part
         const titleText = document.createElementNS(svgNS, 'text');
         titleText.classList.add('concept-title-svg');
         titleText.setAttribute('x', position.x);
-        titleText.setAttribute('y', position.y + dynamicRadius - 12);
+        titleText.setAttribute('y', position.y + dynamicRadius - 8);
         
         // Smart text truncation based on circle size
         let shortTitle = concept.title;
-        const maxChars = Math.floor(dynamicRadius / 3);
+        const maxChars = Math.floor(dynamicRadius / 2.5);
         if (shortTitle.length > maxChars) {
             shortTitle = shortTitle.substring(0, maxChars - 3) + '...';
         }

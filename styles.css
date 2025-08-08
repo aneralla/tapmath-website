@@ -179,7 +179,7 @@ body {
 }
 
 .concept-icon-svg {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     text-anchor: middle;
     dominant-baseline: central;
@@ -188,7 +188,7 @@ body {
 }
 
 .concept-title-svg {
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
     text-anchor: middle;
     fill: #2c3e50;
