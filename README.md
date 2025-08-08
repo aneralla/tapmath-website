@@ -1,4 +1,4 @@
-# TapMath - The Tree of Mathematics
+# TapMath - The Tree of Mathematics 
 
 A visual and interactive website that teaches math concepts to K-9 students using a tree metaphor, where students start with foundational concepts (roots) and progressively advance to more complex topics (branches).
 
