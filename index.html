@@ -38,29 +38,102 @@
 
             <!-- Tree Visualization -->
             <div class="tree-visual">
-                <div class="tree-container-img">
-                    <!-- Tree Background Image -->
-                    <img src="tree-image.jpeg" alt="Math Learning Tree" class="tree-background-img">
+                <svg class="tree-diagram" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Tree Stick Figure -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                                refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#8B4513" />
+                        </marker>
+                    </defs>
                     
-                    <!-- Concept Nodes Overlay -->
-                    <svg class="tree-overlay" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Concept Node Containers -->
-                        <!-- Branches Concepts (Top of tree) -->
-                        <g id="branches-concepts-svg" class="concept-group">
-                            <!-- Concepts will be positioned here -->
-                        </g>
+                    <!-- Ground Line -->
+                    <line x1="0" y1="700" x2="1000" y2="700" stroke="#8B7355" stroke-width="4" opacity="0.6"/>
+                    
+                    <!-- Root System (Underground) -->
+                    <g stroke="#8B4513" stroke-width="3" fill="none" opacity="0.7">
+                        <!-- Main roots -->
+                        <path d="M 500 700 L 350 750" stroke-linecap="round"/>
+                        <path d="M 500 700 L 650 750" stroke-linecap="round"/>
+                        <path d="M 500 700 L 200 730" stroke-linecap="round"/>
+                        <path d="M 500 700 L 800 730" stroke-linecap="round"/>
                         
-                        <!-- Trunk Concepts (Middle of tree) -->
-                        <g id="trunk-concepts-svg" class="concept-group">
-                            <!-- Concepts will be positioned here -->
-                        </g>
+                        <!-- Secondary roots -->
+                        <path d="M 350 750 L 300 770" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M 350 750 L 400 770" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M 650 750 L 600 770" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M 650 750 L 700 770" stroke-width="2" stroke-linecap="round"/>
                         
-                        <!-- Roots Concepts (Bottom of tree) -->
-                        <g id="roots-concepts-svg" class="concept-group">
-                            <!-- Concepts will be positioned here -->
-                        </g>
-                    </svg>
-                </div>
+                        <!-- Smaller rootlets -->
+                        <path d="M 200 730 L 150 750" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M 200 730 L 180 760" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M 800 730 L 850 750" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M 800 730 L 820 760" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                    
+                    <!-- Main Trunk -->
+                    <line x1="500" y1="700" x2="500" y2="400" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
+                    
+                    <!-- Main Branches -->
+                    <g stroke="#8B4513" stroke-width="6" fill="none" stroke-linecap="round">
+                        <!-- Primary branches -->
+                        <path d="M 500 450 L 350 350"/>
+                        <path d="M 500 450 L 650 350"/>
+                        <path d="M 500 420 L 380 320"/>
+                        <path d="M 500 420 L 620 320"/>
+                        
+                        <!-- Secondary branches -->
+                        <path d="M 350 350 L 250 280" stroke-width="4"/>
+                        <path d="M 350 350 L 300 250" stroke-width="4"/>
+                        <path d="M 650 350 L 750 280" stroke-width="4"/>
+                        <path d="M 650 350 L 700 250" stroke-width="4"/>
+                        
+                        <!-- Upper branches -->
+                        <path d="M 500 400 L 450 300" stroke-width="4"/>
+                        <path d="M 500 400 L 550 300" stroke-width="4"/>
+                        <path d="M 500 380 L 480 280" stroke-width="3"/>
+                        <path d="M 500 380 L 520 280" stroke-width="3"/>
+                    </g>
+                    
+                    <!-- Smaller Twigs -->
+                    <g stroke="#654321" stroke-width="2" fill="none" stroke-linecap="round">
+                        <!-- Left side twigs -->
+                        <path d="M 250 280 L 200 250"/>
+                        <path d="M 250 280 L 220 320"/>
+                        <path d="M 300 250 L 280 200"/>
+                        <path d="M 300 250 L 330 220"/>
+                        
+                        <!-- Right side twigs -->
+                        <path d="M 750 280 L 800 250"/>
+                        <path d="M 750 280 L 780 320"/>
+                        <path d="M 700 250 L 720 200"/>
+                        <path d="M 700 250 L 670 220"/>
+                        
+                        <!-- Top twigs -->
+                        <path d="M 450 300 L 420 270"/>
+                        <path d="M 450 300 L 430 330"/>
+                        <path d="M 550 300 L 580 270"/>
+                        <path d="M 550 300 L 570 330"/>
+                        <path d="M 480 280 L 460 250"/>
+                        <path d="M 520 280 L 540 250"/>
+                    </g>
+                    
+                    <!-- Concept Node Containers -->
+                    <!-- Branches Concepts (Top of tree) -->
+                    <g id="branches-concepts-svg" class="concept-group">
+                        <!-- Concepts will be positioned here -->
+                    </g>
+                    
+                    <!-- Trunk Concepts (Middle of tree) -->
+                    <g id="trunk-concepts-svg" class="concept-group">
+                        <!-- Concepts will be positioned here -->
+                    </g>
+                    
+                    <!-- Roots Concepts (Bottom of tree) -->
+                    <g id="roots-concepts-svg" class="concept-group">
+                        <!-- Concepts will be positioned here -->
+                    </g>
+                </svg>
                 
                 <!-- Concept Details Panel -->
                 <div class="concept-details-panel" id="concept-panel">
