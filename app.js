@@ -38,57 +38,163 @@ class TapMathTree {
     }
 
     renderTree() {
-        // Render each section
+        // Render each section on the SVG tree
         this.treeStructure.layers.forEach(layer => {
-            this.renderSection(layer);
+            this.renderTreeSection(layer);
         });
     }
 
-    renderSection(layer) {
-        const sectionElement = document.getElementById(`${layer.id}-concepts`);
-        if (!sectionElement) return;
+    renderTreeSection(layer) {
+        const svgGroup = document.getElementById(`${layer.id}-concepts-svg`);
+        if (!svgGroup) return;
 
         const concepts = this.mathConcepts[layer.id] || [];
+        const positions = this.getConceptPositions(layer.id, concepts.length);
         
-        concepts.forEach(concept => {
-            const conceptCard = this.createConceptCard(concept, layer);
-            sectionElement.appendChild(conceptCard);
+        concepts.forEach((concept, index) => {
+            const conceptNode = this.createConceptNode(concept, layer, positions[index]);
+            svgGroup.appendChild(conceptNode);
         });
     }
 
-    createConceptCard(concept, layer) {
-        const template = document.getElementById('concept-card-template');
-        const card = template.content.cloneNode(true);
+    getConceptPositions(layerId, conceptCount) {
+        const positions = [];
         
-        const cardElement = card.querySelector('.concept-card');
-        cardElement.setAttribute('data-concept-id', concept.id);
-        cardElement.setAttribute('data-layer', layer.id);
+        if (layerId === 'roots') {
+            // Position concepts along the root area
+            const baseY = 600;
+            const spacing = 100;
+            const startX = 500 - ((conceptCount - 1) * spacing) / 2;
+            
+            for (let i = 0; i < conceptCount; i++) {
+                positions.push({
+                    x: startX + (i * spacing),
+                    y: baseY + (Math.random() * 40 - 20), // Add some variation
+                    radius: 30
+                });
+            }
+        } else if (layerId === 'trunk') {
+            // Position concepts along the trunk
+            const centerX = 500;
+            const startY = 450;
+            const spacing = 35;
+            
+            for (let i = 0; i < conceptCount; i++) {
+                const side = i % 2 === 0 ? -1 : 1;
+                const offset = Math.floor(i / 2) * 25 + 40;
+                
+                positions.push({
+                    x: centerX + (side * offset),
+                    y: startY + (i * spacing),
+                    radius: 28
+                });
+            }
+        } else if (layerId === 'branches') {
+            // Position concepts throughout the canopy
+            const canopyPositions = [
+                { x: 380, y: 120 }, { x: 620, y: 130 },
+                { x: 300, y: 180 }, { x: 700, y: 170 },
+                { x: 450, y: 100 }, { x: 550, y: 110 },
+                { x: 350, y: 250 }, { x: 650, y: 260 },
+                { x: 500, y: 150 }, { x: 500, y: 220 }
+            ];
+            
+            for (let i = 0; i < Math.min(conceptCount, canopyPositions.length); i++) {
+                positions.push({
+                    x: canopyPositions[i].x,
+                    y: canopyPositions[i].y,
+                    radius: 25
+                });
+            }
+        }
         
-        // Set content
-        card.querySelector('.concept-title').textContent = concept.title;
-        card.querySelector('.concept-brief').textContent = concept.description;
-        card.querySelector('.grade-badge').textContent = concept.gradeLevel;
-        card.querySelector('.duration-badge').textContent = concept.duration;
+        return positions;
+    }
+
+    createConceptNode(concept, layer, position) {
+        const svgNS = "http://www.w3.org/2000/svg";
         
-        // Set icon based on concept type
-        const icon = this.getConceptIcon(concept);
-        card.querySelector('.concept-icon').textContent = icon;
+        // Create group element for the concept node
+        const group = document.createElementNS(svgNS, 'g');
+        group.classList.add('concept-node');
+        group.setAttribute('data-concept-id', concept.id);
+        group.setAttribute('data-layer', layer.id);
         
         // Set status
         const status = this.getConceptStatus(concept.id, layer.id);
-        const statusElement = card.querySelector('.status-indicator');
-        statusElement.textContent = status.text;
-        statusElement.className = `status-indicator ${status.class}`;
+        group.classList.add(status.class);
+        
+        // Create circle background
+        const circle = document.createElementNS(svgNS, 'circle');
+        circle.classList.add('concept-circle');
+        circle.setAttribute('cx', position.x);
+        circle.setAttribute('cy', position.y);
+        circle.setAttribute('r', position.radius);
+        
+        // Set circle fill based on layer
+        let fillColor = '#ffffff';
+        if (layer.id === 'roots') fillColor = '#FFF8DC';
+        else if (layer.id === 'trunk') fillColor = '#F4E4BC';
+        else if (layer.id === 'branches') fillColor = '#F0FFF0';
+        
+        circle.setAttribute('fill', fillColor);
+        circle.setAttribute('stroke', '#4CAF50');
+        circle.setAttribute('stroke-width', '2');
+        
+        // Create icon text
+        const icon = this.getConceptIcon(concept);
+        const iconText = document.createElementNS(svgNS, 'text');
+        iconText.classList.add('concept-icon-svg');
+        iconText.setAttribute('x', position.x);
+        iconText.setAttribute('y', position.y - 5);
+        iconText.textContent = icon;
+        
+        // Create title text (abbreviated)
+        const titleText = document.createElementNS(svgNS, 'text');
+        titleText.classList.add('concept-title-svg');
+        titleText.setAttribute('x', position.x);
+        titleText.setAttribute('y', position.y + position.radius - 8);
+        
+        // Abbreviate long titles
+        let shortTitle = concept.title;
+        if (shortTitle.length > 12) {
+            shortTitle = shortTitle.substring(0, 10) + '...';
+        }
+        titleText.textContent = shortTitle;
+        
+        // Add elements to group
+        group.appendChild(circle);
+        group.appendChild(iconText);
+        group.appendChild(titleText);
         
         // Add click event if available
         if (status.class === 'available' || status.class === 'completed') {
-            cardElement.addEventListener('click', () => this.openConceptModal(concept));
-        } else {
-            cardElement.style.opacity = '0.6';
-            cardElement.style.cursor = 'not-allowed';
+            group.style.cursor = 'pointer';
+            group.addEventListener('click', () => this.selectConcept(concept));
+            group.addEventListener('dblclick', () => this.openConceptModal(concept));
         }
         
-        return card;
+        return group;
+    }
+    
+    selectConcept(concept) {
+        // Update the concept details panel
+        document.getElementById('panel-title').textContent = concept.title;
+        document.getElementById('panel-description').textContent = concept.description;
+        
+        const metaPanel = document.getElementById('panel-meta');
+        metaPanel.innerHTML = `
+            <span class="grade-badge">Grade: ${concept.gradeLevel}</span>
+            <span class="duration-badge">Duration: ${concept.duration}</span>
+        `;
+        
+        // Add a "Watch Video" button
+        const watchButton = document.createElement('button');
+        watchButton.textContent = '🎥 Watch Video';
+        watchButton.className = 'btn-complete';
+        watchButton.style.marginTop = '10px';
+        watchButton.addEventListener('click', () => this.openConceptModal(concept));
+        metaPanel.appendChild(watchButton);
     }
 
     getConceptIcon(concept) {
@@ -216,7 +322,7 @@ class TapMathTree {
             this.userProgress.completed.push(conceptId);
             this.saveUserProgress();
             this.updateProgressTracker();
-            this.refreshConceptCards();
+            this.refreshConceptNodes();
             
             // Update button
             const completeBtn = document.getElementById('mark-complete');
@@ -255,10 +361,10 @@ class TapMathTree {
         }, 3000);
     }
 
-    refreshConceptCards() {
-        // Clear existing cards
+    refreshConceptNodes() {
+        // Clear existing nodes
         ['roots', 'trunk', 'branches'].forEach(layerId => {
-            const container = document.getElementById(`${layerId}-concepts`);
+            const container = document.getElementById(`${layerId}-concepts-svg`);
             container.innerHTML = '';
         });
         
