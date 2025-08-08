@@ -272,8 +272,18 @@ class TapMathTree {
     }
 
     isConceptUnlocked(conceptId, layerId) {
+        // Check if unlock system is disabled
+        if (!this.treeStructure.progression.unlockSystem) {
+            return true; // All concepts unlocked when system is disabled
+        }
+        
         // Always unlock roots concepts
         if (layerId === 'roots') return true;
+        
+        // Check if prerequisite checking is disabled
+        if (!this.treeStructure.progression.prerequisiteCheck) {
+            return true; // All concepts unlocked when prerequisite check is disabled
+        }
         
         const completed = this.userProgress.completed || [];
         

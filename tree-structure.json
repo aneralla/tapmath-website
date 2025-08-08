@@ -30,8 +30,8 @@
       }
     ],
     "progression": {
-      "unlockSystem": true,
-      "prerequisiteCheck": true,
+      "unlockSystem": false,
+      "prerequisiteCheck": false,
       "description": "Students must master concepts in lower layers before advancing"
     }
   }
