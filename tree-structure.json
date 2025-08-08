@@ -1,0 +1,38 @@
+{
+  "treeStructure": {
+    "layers": [
+      {
+        "id": "roots",
+        "name": "Roots",
+        "description": "Foundation math concepts",
+        "gradeLevel": "K-2",
+        "position": "bottom",
+        "color": "#8B4513",
+        "maxConcepts": 6
+      },
+      {
+        "id": "trunk",
+        "name": "Trunk", 
+        "description": "Core math skills",
+        "gradeLevel": "3-5",
+        "position": "middle",
+        "color": "#A0522D",
+        "maxConcepts": 8
+      },
+      {
+        "id": "branches",
+        "name": "Branches",
+        "description": "Advanced math concepts", 
+        "gradeLevel": "6-9",
+        "position": "top",
+        "color": "#228B22",
+        "maxConcepts": 10
+      }
+    ],
+    "progression": {
+      "unlockSystem": true,
+      "prerequisiteCheck": true,
+      "description": "Students must master concepts in lower layers before advancing"
+    }
+  }
+}

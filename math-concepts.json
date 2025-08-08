@@ -1,0 +1,226 @@
+{
+  "mathConcepts": {
+    "roots": [
+      {
+        "id": "counting",
+        "title": "Counting & Numbers",
+        "description": "Learning to count from 1-100 and understand number recognition",
+        "gradeLevel": "K-1",
+        "videoUrl": "https://www.youtube.com/watch?v=DR-cfDsHCGA",
+        "duration": "5:30",
+        "topics": ["Number recognition", "Counting to 100", "Number order"]
+      },
+      {
+        "id": "shapes",
+        "title": "Basic Shapes",
+        "description": "Identifying and understanding basic geometric shapes",
+        "gradeLevel": "K-1", 
+        "videoUrl": "https://www.youtube.com/watch?v=tksbRX9Hsss",
+        "duration": "6:15",
+        "topics": ["Circle", "Square", "Triangle", "Rectangle"]
+      },
+      {
+        "id": "addition-basic",
+        "title": "Simple Addition",
+        "description": "Adding numbers up to 10",
+        "gradeLevel": "K-2",
+        "videoUrl": "https://www.youtube.com/watch?v=VWU_fEbQHdw",
+        "duration": "7:20",
+        "topics": ["Adding with fingers", "Addition facts to 10", "Word problems"]
+      },
+      {
+        "id": "subtraction-basic", 
+        "title": "Simple Subtraction",
+        "description": "Subtracting numbers up to 10",
+        "gradeLevel": "K-2",
+        "videoUrl": "https://www.youtube.com/watch?v=yX-XPWZkTfA",
+        "duration": "6:45",
+        "topics": ["Taking away", "Subtraction facts to 10", "Story problems"]
+      },
+      {
+        "id": "patterns",
+        "title": "Patterns & Sequences",
+        "description": "Recognizing and creating simple patterns",
+        "gradeLevel": "1-2",
+        "videoUrl": "https://www.youtube.com/watch?v=M1MsIXtNbeU",
+        "duration": "5:00",
+        "topics": ["Color patterns", "Number patterns", "Shape patterns"]
+      },
+      {
+        "id": "measurement-intro",
+        "title": "Introduction to Measurement",
+        "description": "Comparing sizes and basic measurement concepts",
+        "gradeLevel": "1-2",
+        "videoUrl": "https://www.youtube.com/watch?v=qI3jJdJRh5w",
+        "duration": "6:30",
+        "topics": ["Longer/shorter", "Bigger/smaller", "Heavy/light"]
+      }
+    ],
+    "trunk": [
+      {
+        "id": "place-value",
+        "title": "Place Value",
+        "description": "Understanding tens and ones, hundreds",
+        "gradeLevel": "2-3",
+        "videoUrl": "https://www.youtube.com/watch?v=WPK_hi8_4DY",
+        "duration": "8:15",
+        "topics": ["Tens and ones", "Hundreds", "Expanded form"]
+      },
+      {
+        "id": "multiplication-intro",
+        "title": "Introduction to Multiplication",
+        "description": "Understanding multiplication as repeated addition",
+        "gradeLevel": "3-4",
+        "videoUrl": "https://www.youtube.com/watch?v=GXGhR_b6IeA",
+        "duration": "9:30",
+        "topics": ["Arrays", "Repeated addition", "Times tables 2-5"]
+      },
+      {
+        "id": "division-intro",
+        "title": "Introduction to Division",
+        "description": "Understanding division as sharing equally",
+        "gradeLevel": "3-4",
+        "videoUrl": "https://www.youtube.com/watch?v=RjYKbdoamSk",
+        "duration": "8:45",
+        "topics": ["Sharing equally", "Division facts", "Remainders"]
+      },
+      {
+        "id": "fractions-basic",
+        "title": "Basic Fractions",
+        "description": "Understanding parts of a whole",
+        "gradeLevel": "3-4",
+        "videoUrl": "https://www.youtube.com/watch?v=bWIttsoKhqo",
+        "duration": "10:00",
+        "topics": ["Half and quarters", "Numerator/denominator", "Comparing fractions"]
+      },
+      {
+        "id": "geometry-2d",
+        "title": "2D Geometry",
+        "description": "Properties of 2D shapes and angles",
+        "gradeLevel": "4-5",
+        "videoUrl": "https://www.youtube.com/watch?v=ob2xBJT6ISE",
+        "duration": "9:15",
+        "topics": ["Polygons", "Angles", "Symmetry", "Perimeter"]
+      },
+      {
+        "id": "decimals-intro",
+        "title": "Introduction to Decimals",
+        "description": "Understanding decimal notation and place value",
+        "gradeLevel": "4-5",
+        "videoUrl": "https://www.youtube.com/watch?v=GstGz1TjK_o",
+        "duration": "8:30",
+        "topics": ["Tenths", "Hundredths", "Decimal place value"]
+      },
+      {
+        "id": "data-graphs",
+        "title": "Data & Graphs",
+        "description": "Reading and creating simple graphs",
+        "gradeLevel": "3-5",
+        "videoUrl": "https://www.youtube.com/watch?v=YGO7J4PoHZQ",
+        "duration": "7:45",
+        "topics": ["Bar graphs", "Pictographs", "Line plots"]
+      },
+      {
+        "id": "area-perimeter",
+        "title": "Area & Perimeter",
+        "description": "Calculating area and perimeter of rectangles",
+        "gradeLevel": "4-5",
+        "videoUrl": "https://www.youtube.com/watch?v=JVwjdWgsWqI",
+        "duration": "9:00",
+        "topics": ["Perimeter formula", "Area of rectangles", "Square units"]
+      }
+    ],
+    "branches": [
+      {
+        "id": "fractions-advanced",
+        "title": "Advanced Fractions",
+        "description": "Operations with fractions and mixed numbers",
+        "gradeLevel": "5-6",
+        "videoUrl": "https://www.youtube.com/watch?v=Zh5S5bRHFGs",
+        "duration": "12:30",
+        "topics": ["Adding fractions", "Subtracting fractions", "Mixed numbers"]
+      },
+      {
+        "id": "integers",
+        "title": "Integers & Negative Numbers",
+        "description": "Working with positive and negative numbers",
+        "gradeLevel": "6-7",
+        "videoUrl": "https://www.youtube.com/watch?v=Lk0nOJBcB5w",
+        "duration": "11:15",
+        "topics": ["Number line", "Adding integers", "Subtracting integers"]
+      },
+      {
+        "id": "ratios-proportions",
+        "title": "Ratios & Proportions",
+        "description": "Understanding relationships between quantities",
+        "gradeLevel": "6-7",
+        "videoUrl": "https://www.youtube.com/watch?v=8cd2VDNKU0Q",
+        "duration": "10:45",
+        "topics": ["Ratios", "Proportions", "Cross multiplication"]
+      },
+      {
+        "id": "percentages",
+        "title": "Percentages",
+        "description": "Converting between fractions, decimals, and percentages",
+        "gradeLevel": "6-7",
+        "videoUrl": "https://www.youtube.com/watch?v=9QzjdukKgeM",
+        "duration": "11:00",
+        "topics": ["Percent to decimal", "Finding percentages", "Percent problems"]
+      },
+      {
+        "id": "algebra-intro",
+        "title": "Introduction to Algebra",
+        "description": "Basic algebraic thinking and simple equations",
+        "gradeLevel": "7-8",
+        "videoUrl": "https://www.youtube.com/watch?v=NybHckSEQBI",
+        "duration": "13:20",
+        "topics": ["Variables", "Simple equations", "Order of operations"]
+      },
+      {
+        "id": "geometry-3d",
+        "title": "3D Geometry",
+        "description": "Volume and surface area of 3D shapes",
+        "gradeLevel": "7-8",
+        "videoUrl": "https://www.youtube.com/watch?v=KhTZdSn8nLc",
+        "duration": "12:00",
+        "topics": ["Cubes", "Rectangular prisms", "Volume formulas"]
+      },
+      {
+        "id": "probability",
+        "title": "Probability",
+        "description": "Basic probability concepts and calculations",
+        "gradeLevel": "7-8",
+        "videoUrl": "https://www.youtube.com/watch?v=SkidyDQuupA",
+        "duration": "10:30",
+        "topics": ["Outcomes", "Probability fractions", "Predictions"]
+      },
+      {
+        "id": "statistics",
+        "title": "Statistics",
+        "description": "Mean, median, mode and data analysis",
+        "gradeLevel": "7-9",
+        "videoUrl": "https://www.youtube.com/watch?v=LMbJnVLO9z0",
+        "duration": "11:45",
+        "topics": ["Mean", "Median", "Mode", "Range"]
+      },
+      {
+        "id": "coordinate-plane",
+        "title": "Coordinate Plane",
+        "description": "Plotting points and graphing on coordinate plane",
+        "gradeLevel": "8-9",
+        "videoUrl": "https://www.youtube.com/watch?v=j_VhBZn_yBY",
+        "duration": "12:15",
+        "topics": ["Ordered pairs", "Quadrants", "Graphing lines"]
+      },
+      {
+        "id": "linear-equations",
+        "title": "Linear Equations",
+        "description": "Solving and graphing linear equations",
+        "gradeLevel": "8-9",
+        "videoUrl": "https://www.youtube.com/watch?v=jZamJ9WjOOM",
+        "duration": "14:00",
+        "topics": ["Slope", "Y-intercept", "Solving equations"]
+      }
+    ]
+  }
+}
