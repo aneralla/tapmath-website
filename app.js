@@ -127,12 +127,17 @@ class TapMathTree {
         const status = this.getConceptStatus(concept.id, layer.id);
         group.classList.add(status.class);
         
+        // Calculate dynamic radius based on text length
+        const baseRadius = position.radius;
+        const titleLength = concept.title.length;
+        const dynamicRadius = Math.max(baseRadius, Math.min(titleLength * 2 + 15, baseRadius + 15));
+        
         // Create circle background
         const circle = document.createElementNS(svgNS, 'circle');
         circle.classList.add('concept-circle');
         circle.setAttribute('cx', position.x);
         circle.setAttribute('cy', position.y);
-        circle.setAttribute('r', position.radius);
+        circle.setAttribute('r', dynamicRadius);
         
         // Set circle fill based on layer
         let fillColor = '#ffffff';
@@ -149,21 +154,41 @@ class TapMathTree {
         const iconText = document.createElementNS(svgNS, 'text');
         iconText.classList.add('concept-icon-svg');
         iconText.setAttribute('x', position.x);
-        iconText.setAttribute('y', position.y - 5);
+        iconText.setAttribute('y', position.y - 8);
         iconText.textContent = icon;
         
-        // Create title text (abbreviated)
+        // Create title text with better wrapping
         const titleText = document.createElementNS(svgNS, 'text');
         titleText.classList.add('concept-title-svg');
         titleText.setAttribute('x', position.x);
-        titleText.setAttribute('y', position.y + position.radius - 8);
+        titleText.setAttribute('y', position.y + dynamicRadius - 12);
         
-        // Abbreviate long titles
+        // Smart text truncation based on circle size
         let shortTitle = concept.title;
-        if (shortTitle.length > 12) {
-            shortTitle = shortTitle.substring(0, 10) + '...';
+        const maxChars = Math.floor(dynamicRadius / 3);
+        if (shortTitle.length > maxChars) {
+            shortTitle = shortTitle.substring(0, maxChars - 3) + '...';
         }
         titleText.textContent = shortTitle;
+        
+        // Create multi-line text if needed for longer titles
+        if (concept.title.length > 15 && dynamicRadius > 30) {
+            const words = concept.title.split(' ');
+            const midPoint = Math.ceil(words.length / 2);
+            const firstLine = words.slice(0, midPoint).join(' ');
+            const secondLine = words.slice(midPoint).join(' ');
+            
+            if (firstLine.length <= maxChars && secondLine.length <= maxChars) {
+                titleText.textContent = firstLine;
+                
+                const titleText2 = document.createElementNS(svgNS, 'text');
+                titleText2.classList.add('concept-title-svg');
+                titleText2.setAttribute('x', position.x);
+                titleText2.setAttribute('y', position.y + dynamicRadius - 4);
+                titleText2.textContent = secondLine;
+                group.appendChild(titleText2);
+            }
+        }
         
         // Add elements to group
         group.appendChild(circle);
