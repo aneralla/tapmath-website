@@ -61,49 +61,52 @@ class TapMathTree {
         const positions = [];
         
         if (layerId === 'roots') {
-            // Position concepts along the underground root system
+            // Position concepts at the base/root area of the tree
+            // Adjust these coordinates based on your tree image
             const rootPositions = [
-                { x: 300, y: 705 }, { x: 400, y: 715 }, { x: 500, y: 700 },
-                { x: 600, y: 715 }, { x: 700, y: 705 }, { x: 350, y: 725 }
+                { x: 350, y: 720 }, { x: 450, y: 730 }, { x: 550, y: 720 },
+                { x: 650, y: 730 }, { x: 400, y: 750 }, { x: 600, y: 750 }
             ];
             
             for (let i = 0; i < Math.min(conceptCount, rootPositions.length); i++) {
                 positions.push({
                     x: rootPositions[i].x,
                     y: rootPositions[i].y,
-                    radius: 25
+                    radius: 28
                 });
             }
         } else if (layerId === 'trunk') {
-            // Position concepts along the main trunk and close branches
+            // Position concepts along the trunk area
+            // Adjust these coordinates based on your tree image trunk location
             const trunkPositions = [
-                { x: 470, y: 650 }, { x: 530, y: 640 }, { x: 460, y: 580 }, { x: 540, y: 590 },
-                { x: 450, y: 520 }, { x: 550, y: 530 }, { x: 470, y: 460 }, { x: 530, y: 470 }
+                { x: 450, y: 650 }, { x: 550, y: 650 }, { x: 430, y: 600 }, { x: 570, y: 600 },
+                { x: 460, y: 550 }, { x: 540, y: 550 }, { x: 480, y: 500 }, { x: 520, y: 500 }
             ];
             
             for (let i = 0; i < Math.min(conceptCount, trunkPositions.length); i++) {
                 positions.push({
                     x: trunkPositions[i].x,
                     y: trunkPositions[i].y,
-                    radius: 24
+                    radius: 26
                 });
             }
         } else if (layerId === 'branches') {
-            // Position concepts throughout the realistic foliage areas
+            // Position concepts in the canopy/branches area
+            // Adjust these coordinates based on your tree image foliage
             const branchPositions = [
-                // Main canopy areas
-                { x: 380, y: 250 }, { x: 620, y: 260 }, { x: 500, y: 220 },
-                // Secondary foliage clusters  
-                { x: 320, y: 290 }, { x: 680, y: 300 }, { x: 500, y: 180 },
-                // Smaller leaf clusters
-                { x: 450, y: 200 }, { x: 550, y: 210 }, { x: 470, y: 280 }, { x: 530, y: 285 }
+                // Upper canopy
+                { x: 500, y: 200 }, { x: 400, y: 230 }, { x: 600, y: 240 },
+                // Mid-level branches  
+                { x: 350, y: 300 }, { x: 650, y: 310 }, { x: 500, y: 280 },
+                // Lower branches
+                { x: 450, y: 350 }, { x: 550, y: 360 }, { x: 380, y: 380 }, { x: 620, y: 390 }
             ];
             
             for (let i = 0; i < Math.min(conceptCount, branchPositions.length); i++) {
                 positions.push({
                     x: branchPositions[i].x,
                     y: branchPositions[i].y,
-                    radius: 22
+                    radius: 24
                 });
             }
         }
