@@ -41,37 +41,94 @@
                 <svg class="tree-diagram" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
                     <!-- Tree Background -->
                     <defs>
-                        <radialGradient id="leafGradient" cx="50%" cy="30%" r="70%">
-                            <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+                        <!-- Gradients for realistic tree coloring -->
+                        <radialGradient id="leafGradient1" cx="30%" cy="30%" r="70%">
+                            <stop offset="0%" style="stop-color:#98FB98;stop-opacity:1" />
+                            <stop offset="70%" style="stop-color:#32CD32;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="leafGradient2" cx="50%" cy="20%" r="80%">
+                            <stop offset="0%" style="stop-color:#ADFF2F;stop-opacity:1" />
+                            <stop offset="60%" style="stop-color:#7CFC00;stop-opacity:1" />
                             <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
                         </radialGradient>
                         <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-                            <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+                            <stop offset="0%" style="stop-color:#654321;stop-opacity:1" />
+                            <stop offset="30%" style="stop-color:#8B4513;stop-opacity:1" />
+                            <stop offset="70%" style="stop-color:#A0522D;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
                         </linearGradient>
-                        <radialGradient id="rootGradient" cx="50%" cy="0%" r="100%">
-                            <stop offset="0%" style="stop-color:#CD853F;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+                        <linearGradient id="branchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                        </linearGradient>
+                        <radialGradient id="rootGradient" cx="50%" cy="10%" r="90%">
+                            <stop offset="0%" style="stop-color:#D2B48C;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:0.6" />
                         </radialGradient>
                     </defs>
                     
-                    <!-- Tree Crown/Branches -->
-                    <circle cx="500" cy="200" r="280" fill="url(#leafGradient)" opacity="0.9"/>
-                    <circle cx="350" cy="150" r="150" fill="url(#leafGradient)" opacity="0.8"/>
-                    <circle cx="650" cy="160" r="140" fill="url(#leafGradient)" opacity="0.8"/>
-                    <circle cx="420" cy="100" r="100" fill="url(#leafGradient)" opacity="0.7"/>
-                    <circle cx="580" cy="110" r="90" fill="url(#leafGradient)" opacity="0.7"/>
+                    <!-- Ground/Soil -->
+                    <ellipse cx="500" cy="750" rx="450" ry="50" fill="#8B7355" opacity="0.3"/>
                     
-                    <!-- Tree Trunk -->
-                    <rect x="460" y="400" width="80" height="180" fill="url(#trunkGradient)" rx="20"/>
-                    <rect x="455" y="420" width="90" height="140" fill="url(#trunkGradient)" rx="25" opacity="0.8"/>
+                    <!-- Tree Roots (underground) -->
+                    <path d="M 200 700 Q 350 720 500 700 Q 650 720 800 700" 
+                          stroke="url(#rootGradient)" stroke-width="8" fill="none" opacity="0.7"/>
+                    <path d="M 300 710 Q 400 730 500 710 Q 600 730 700 710" 
+                          stroke="url(#rootGradient)" stroke-width="6" fill="none" opacity="0.6"/>
+                    <path d="M 250 720 Q 375 735 500 720 Q 625 735 750 720" 
+                          stroke="url(#rootGradient)" stroke-width="4" fill="none" opacity="0.5"/>
                     
-                    <!-- Tree Roots -->
-                    <ellipse cx="500" cy="600" rx="300" ry="60" fill="url(#rootGradient)" opacity="0.8"/>
-                    <ellipse cx="350" cy="620" rx="150" ry="40" fill="url(#rootGradient)" opacity="0.6"/>
-                    <ellipse cx="650" cy="620" rx="150" ry="40" fill="url(#rootGradient)" opacity="0.6"/>
-                    <ellipse cx="500" cy="640" rx="200" ry="30" fill="url(#rootGradient)" opacity="0.7"/>
+                    <!-- Main Tree Trunk -->
+                    <path d="M 480 700 Q 485 650 490 600 Q 485 550 480 500 Q 485 450 490 400 Q 495 350 500 300 Q 505 350 510 400 Q 515 450 520 500 Q 515 550 520 600 Q 515 650 520 700" 
+                          fill="url(#trunkGradient)" stroke="#654321" stroke-width="2"/>
+                    
+                    <!-- Tree Branches -->
+                    <!-- Main left branch -->
+                    <path d="M 490 350 Q 450 330 400 310 Q 350 300 320 290" 
+                          stroke="url(#branchGradient)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    <!-- Main right branch -->
+                    <path d="M 510 350 Q 550 330 600 310 Q 650 300 680 290" 
+                          stroke="url(#branchGradient)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Secondary branches -->
+                    <path d="M 495 380 Q 460 365 430 350 Q 400 340 380 335" 
+                          stroke="url(#branchGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    <path d="M 505 380 Q 540 365 570 350 Q 600 340 620 335" 
+                          stroke="url(#branchGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Smaller branches -->
+                    <path d="M 490 320 Q 460 310 440 300" 
+                          stroke="url(#branchGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M 510 320 Q 540 310 560 300" 
+                          stroke="url(#branchGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M 500 300 Q 480 290 470 280" 
+                          stroke="url(#branchGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 500 300 Q 520 290 530 280" 
+                          stroke="url(#branchGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Foliage/Leaves - Natural leaf shapes -->
+                    <!-- Main canopy -->
+                    <ellipse cx="380" cy="250" rx="120" ry="100" fill="url(#leafGradient1)" opacity="0.9" transform="rotate(-15 380 250)"/>
+                    <ellipse cx="620" cy="260" rx="110" ry="95" fill="url(#leafGradient2)" opacity="0.9" transform="rotate(20 620 260)"/>
+                    <ellipse cx="500" cy="220" rx="100" ry="80" fill="url(#leafGradient1)" opacity="0.95"/>
+                    
+                    <!-- Secondary foliage clusters -->
+                    <ellipse cx="320" cy="290" rx="80" ry="70" fill="url(#leafGradient2)" opacity="0.8" transform="rotate(-10 320 290)"/>
+                    <ellipse cx="680" cy="300" rx="75" ry="65" fill="url(#leafGradient1)" opacity="0.8" transform="rotate(15 680 300)"/>
+                    <ellipse cx="500" cy="180" rx="60" ry="50" fill="url(#leafGradient2)" opacity="0.85"/>
+                    
+                    <!-- Smaller leaf clusters -->
+                    <ellipse cx="450" cy="200" rx="40" ry="35" fill="url(#leafGradient1)" opacity="0.7"/>
+                    <ellipse cx="550" cy="210" rx="45" ry="40" fill="url(#leafGradient2)" opacity="0.7"/>
+                    <ellipse cx="470" cy="280" rx="35" ry="30" fill="url(#leafGradient1)" opacity="0.6"/>
+                    <ellipse cx="530" cy="285" rx="38" ry="32" fill="url(#leafGradient2)" opacity="0.6"/>
+                    
+                    <!-- Trunk texture lines -->
+                    <path d="M 485 650 Q 490 500 485 350" stroke="#654321" stroke-width="1" fill="none" opacity="0.8"/>
+                    <path d="M 515 650 Q 510 500 515 350" stroke="#654321" stroke-width="1" fill="none" opacity="0.8"/>
+                    <path d="M 495 600 Q 500 550 495 500" stroke="#8B4513" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M 505 600 Q 500 550 505 500" stroke="#8B4513" stroke-width="1" fill="none" opacity="0.6"/>
                     
                     <!-- Concept Node Containers -->
                     <!-- Branches Concepts (Top of tree) -->

@@ -61,49 +61,49 @@ class TapMathTree {
         const positions = [];
         
         if (layerId === 'roots') {
-            // Position concepts along the root area
-            const baseY = 600;
-            const spacing = 100;
-            const startX = 500 - ((conceptCount - 1) * spacing) / 2;
+            // Position concepts along the underground root system
+            const rootPositions = [
+                { x: 300, y: 705 }, { x: 400, y: 715 }, { x: 500, y: 700 },
+                { x: 600, y: 715 }, { x: 700, y: 705 }, { x: 350, y: 725 }
+            ];
             
-            for (let i = 0; i < conceptCount; i++) {
+            for (let i = 0; i < Math.min(conceptCount, rootPositions.length); i++) {
                 positions.push({
-                    x: startX + (i * spacing),
-                    y: baseY + (Math.random() * 40 - 20), // Add some variation
-                    radius: 30
+                    x: rootPositions[i].x,
+                    y: rootPositions[i].y,
+                    radius: 25
                 });
             }
         } else if (layerId === 'trunk') {
-            // Position concepts along the trunk
-            const centerX = 500;
-            const startY = 450;
-            const spacing = 35;
+            // Position concepts along the main trunk and close branches
+            const trunkPositions = [
+                { x: 470, y: 650 }, { x: 530, y: 640 }, { x: 460, y: 580 }, { x: 540, y: 590 },
+                { x: 450, y: 520 }, { x: 550, y: 530 }, { x: 470, y: 460 }, { x: 530, y: 470 }
+            ];
             
-            for (let i = 0; i < conceptCount; i++) {
-                const side = i % 2 === 0 ? -1 : 1;
-                const offset = Math.floor(i / 2) * 25 + 40;
-                
+            for (let i = 0; i < Math.min(conceptCount, trunkPositions.length); i++) {
                 positions.push({
-                    x: centerX + (side * offset),
-                    y: startY + (i * spacing),
-                    radius: 28
+                    x: trunkPositions[i].x,
+                    y: trunkPositions[i].y,
+                    radius: 24
                 });
             }
         } else if (layerId === 'branches') {
-            // Position concepts throughout the canopy
-            const canopyPositions = [
-                { x: 380, y: 120 }, { x: 620, y: 130 },
-                { x: 300, y: 180 }, { x: 700, y: 170 },
-                { x: 450, y: 100 }, { x: 550, y: 110 },
-                { x: 350, y: 250 }, { x: 650, y: 260 },
-                { x: 500, y: 150 }, { x: 500, y: 220 }
+            // Position concepts throughout the realistic foliage areas
+            const branchPositions = [
+                // Main canopy areas
+                { x: 380, y: 250 }, { x: 620, y: 260 }, { x: 500, y: 220 },
+                // Secondary foliage clusters  
+                { x: 320, y: 290 }, { x: 680, y: 300 }, { x: 500, y: 180 },
+                // Smaller leaf clusters
+                { x: 450, y: 200 }, { x: 550, y: 210 }, { x: 470, y: 280 }, { x: 530, y: 285 }
             ];
             
-            for (let i = 0; i < Math.min(conceptCount, canopyPositions.length); i++) {
+            for (let i = 0; i < Math.min(conceptCount, branchPositions.length); i++) {
                 positions.push({
-                    x: canopyPositions[i].x,
-                    y: canopyPositions[i].y,
-                    radius: 25
+                    x: branchPositions[i].x,
+                    y: branchPositions[i].y,
+                    radius: 22
                 });
             }
         }
