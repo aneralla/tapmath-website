@@ -60,58 +60,61 @@ class TapMathTree {
         });
     }
 
-    getConceptPositions(layerId, conceptCount) {
+    // --- helpers for layout -------------------------------------------------
+    generateArcPositions(centerX, centerY, radiusX, radiusY, startDeg, endDeg, count, jitter = 0, baseRadius = 24) {
+        if (count <= 0) return [];
+        const toRad = (deg) => (deg * Math.PI) / 180;
         const positions = [];
-        
-        if (layerId === 'roots') {
-            // Position concepts along the root system with better spacing
-            const rootPositions = [
-                { x: 200, y: 740 }, { x: 350, y: 760 }, { x: 500, y: 730 },
-                { x: 650, y: 760 }, { x: 800, y: 740 }, { x: 325, y: 780 }
-            ];
-            
-            for (let i = 0; i < Math.min(conceptCount, rootPositions.length); i++) {
-                positions.push({
-                    x: rootPositions[i].x,
-                    y: rootPositions[i].y,
-                    radius: 25
-                });
+        const total = Math.max(1, count - 1);
+        const start = toRad(startDeg);
+        const end = toRad(endDeg);
+        const step = (end - start) / total;
+        for (let i = 0; i < count; i++) {
+            const angle = start + step * i;
+            let x = centerX + radiusX * Math.cos(angle);
+            let y = centerY + radiusY * Math.sin(angle);
+            if (jitter > 0) {
+                x += (Math.random() * 2 - 1) * jitter;
+                y += (Math.random() * 2 - 1) * jitter;
             }
-        } else if (layerId === 'trunk') {
-            // Position concepts along the trunk with proper vertical spacing
-            const trunkPositions = [
-                { x: 460, y: 680 }, { x: 540, y: 670 }, { x: 450, y: 620 }, { x: 550, y: 610 },
-                { x: 470, y: 560 }, { x: 530, y: 570 }, { x: 440, y: 510 }, { x: 560, y: 520 }
-            ];
-            
-            for (let i = 0; i < Math.min(conceptCount, trunkPositions.length); i++) {
-                positions.push({
-                    x: trunkPositions[i].x,
-                    y: trunkPositions[i].y,
-                    radius: 23
-                });
-            }
-        } else if (layerId === 'branches') {
-            // Position concepts strategically on branches with better spacing
-            const branchPositions = [
-                // Upper branches - spread out more
-                { x: 480, y: 280 }, { x: 520, y: 280 }, { x: 280, y: 200 }, { x: 720, y: 200 },
-                // Mid-level branches - wider spread
-                { x: 300, y: 250 }, { x: 700, y: 250 }, { x: 420, y: 270 }, { x: 580, y: 270 },
-                // Lower branch junctions - better aligned
-                { x: 380, y: 320 }, { x: 620, y: 320 }
-            ];
-            
-            for (let i = 0; i < Math.min(conceptCount, branchPositions.length); i++) {
-                positions.push({
-                    x: branchPositions[i].x,
-                    y: branchPositions[i].y,
-                    radius: 22
-                });
-            }
+            positions.push({ x, y, radius: baseRadius });
         }
-        
         return positions;
+    }
+
+    generateTrunkPositions(centerX, startY, endY, count) {
+        const positions = [];
+        const total = Math.max(1, count - 1);
+        const step = (startY - endY) / total;
+        for (let i = 0; i < count; i++) {
+            const y = startY - step * i;
+            const side = i % 2 === 0 ? -1 : 1;
+            const horizontalOffset = 70 + (i % 3) * 15; // spread further out from trunk
+            const x = centerX + side * horizontalOffset + (Math.random() * 8 - 4);
+            positions.push({ x, y: y + (Math.random() * 8 - 4), radius: 24 });
+        }
+        return positions;
+    }
+
+    // -----------------------------------------------------------------------
+    getConceptPositions(layerId, conceptCount) {
+        if (layerId === 'roots') {
+            // Wide arc under the ground line
+            return this.generateArcPositions(500, 765, 420, 28, 200, -20, conceptCount, 8, 26);
+        }
+        if (layerId === 'trunk') {
+            // Along trunk area with alternating left/right offsets
+            return this.generateTrunkPositions(500, 665, 495, conceptCount);
+        }
+        if (layerId === 'branches') {
+            // Distribute across two canopy arcs for even spacing
+            const primaryCount = Math.ceil(conceptCount * 0.6);
+            const secondaryCount = conceptCount - primaryCount;
+            const topArc = this.generateArcPositions(500, 290, 360, 120, 210, -30, primaryCount, 10, 22);
+            const midArc = this.generateArcPositions(500, 340, 320, 110, 200, -20, secondaryCount, 10, 22);
+            return [...topArc, ...midArc];
+        }
+        return [];
     }
 
     createConceptNode(concept, layer, position) {
@@ -204,7 +207,7 @@ class TapMathTree {
         
         return group;
     }
-    
+
     selectConcept(concept) {
         // Update the concept details panel
         document.getElementById('panel-title').textContent = concept.title;
