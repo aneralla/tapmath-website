@@ -27,13 +27,11 @@ class TapMathTree {
             const treeResponse = await fetch('./tree-structure.json');
             const treeData = await treeResponse.json();
             this.treeStructure = treeData.treeStructure;
-            console.log('Loaded tree structure:', this.treeStructure);
 
             // Load math concepts
             const conceptsResponse = await fetch('./math-concepts.json');
             const conceptsData = await conceptsResponse.json();
             this.mathConcepts = conceptsData.mathConcepts;
-            console.log('Loaded math concepts:', this.mathConcepts);
         } catch (error) {
             console.error('Error loading data:', error);
             throw new Error('Failed to load configuration files');
@@ -108,25 +106,27 @@ class TapMathTree {
         }
         
         if (layerId === 'trunk') {
-            // Position along the curved trunk with natural spacing
+            // Position around the thicker trunk with more spacing
             const trunkPositions = [
-                { x: 470, y: 680 }, { x: 530, y: 670 }, { x: 460, y: 620 }, { x: 540, y: 610 },
-                { x: 475, y: 560 }, { x: 525, y: 570 }, { x: 465, y: 510 }, { x: 535, y: 520 }
+                { x: 420, y: 680 }, { x: 580, y: 670 }, { x: 410, y: 620 }, { x: 590, y: 610 },
+                { x: 425, y: 560 }, { x: 575, y: 570 }, { x: 415, y: 500 }, { x: 585, y: 510 }
             ];
-            return trunkPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 24 }));
+            return trunkPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 26 }));
         }
         
         if (layerId === 'branches') {
-            // Position within and around the foliage clusters
+            // Position throughout the fluffy foliage clusters with better spacing
             const branchPositions = [
-                // Main foliage clusters
-                { x: 350, y: 200 }, { x: 650, y: 200 }, { x: 500, y: 180 },
-                // Secondary foliage areas
-                { x: 280, y: 240 }, { x: 720, y: 240 }, { x: 420, y: 220 }, { x: 580, y: 220 },
-                // Smaller clusters and branch endpoints
-                { x: 320, y: 270 }, { x: 680, y: 270 }, { x: 450, y: 200 }
+                // Outer large clusters
+                { x: 250, y: 220 }, { x: 750, y: 220 },
+                // Main central clusters
+                { x: 400, y: 180 }, { x: 600, y: 180 }, { x: 500, y: 160 },
+                // Secondary clusters  
+                { x: 320, y: 260 }, { x: 680, y: 260 }, { x: 450, y: 240 }, { x: 550, y: 240 },
+                // Additional spread positions
+                { x: 370, y: 210 }
             ];
-            return branchPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 22 }));
+            return branchPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 24 }));
         }
         
         return [];
@@ -293,36 +293,26 @@ class TapMathTree {
     }
 
     isConceptUnlocked(conceptId, layerId) {
-        console.log(`Checking unlock for ${conceptId} in layer ${layerId}`);
-        console.log('Tree structure progression:', this.treeStructure.progression);
-        
         // Check if unlock system is disabled
         if (!this.treeStructure.progression.unlockSystem) {
-            console.log('Unlock system disabled - unlocking all concepts');
             return true; // All concepts unlocked when system is disabled
         }
         
         // Always unlock roots concepts
-        if (layerId === 'roots') {
-            console.log('Roots layer - always unlocked');
-            return true;
-        }
+        if (layerId === 'roots') return true;
         
         // Check if prerequisite checking is disabled
         if (!this.treeStructure.progression.prerequisiteCheck) {
-            console.log('Prerequisite check disabled - unlocking all concepts');
             return true; // All concepts unlocked when prerequisite check is disabled
         }
         
         const completed = this.userProgress.completed || [];
-        console.log('Completed concepts:', completed);
         
         // For trunk concepts, check if enough root concepts are completed
         if (layerId === 'trunk') {
             const rootsCompleted = this.mathConcepts.roots.filter(concept => 
                 completed.includes(concept.id)
             ).length;
-            console.log(`Trunk unlock check: ${rootsCompleted}/4 roots completed`);
             return rootsCompleted >= 4; // Need 4 roots concepts completed
         }
         
@@ -331,7 +321,6 @@ class TapMathTree {
             const trunkCompleted = this.mathConcepts.trunk.filter(concept => 
                 completed.includes(concept.id)
             ).length;
-            console.log(`Branches unlock check: ${trunkCompleted}/6 trunk completed`);
             return trunkCompleted >= 6; // Need 6 trunk concepts completed
         }
         
