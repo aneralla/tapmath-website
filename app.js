@@ -99,21 +99,36 @@ class TapMathTree {
     // -----------------------------------------------------------------------
     getConceptPositions(layerId, conceptCount) {
         if (layerId === 'roots') {
-            // Wide arc under the ground line
-            return this.generateArcPositions(500, 765, 420, 28, 200, -20, conceptCount, 8, 26);
+            // Position along the realistic root system paths
+            const rootPositions = [
+                { x: 250, y: 750 }, { x: 350, y: 760 }, { x: 450, y: 740 },
+                { x: 550, y: 740 }, { x: 650, y: 760 }, { x: 750, y: 750 }
+            ];
+            return rootPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 26 }));
         }
+        
         if (layerId === 'trunk') {
-            // Along trunk area with alternating left/right offsets
-            return this.generateTrunkPositions(500, 665, 495, conceptCount);
+            // Position along the curved trunk with natural spacing
+            const trunkPositions = [
+                { x: 470, y: 680 }, { x: 530, y: 670 }, { x: 460, y: 620 }, { x: 540, y: 610 },
+                { x: 475, y: 560 }, { x: 525, y: 570 }, { x: 465, y: 510 }, { x: 535, y: 520 }
+            ];
+            return trunkPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 24 }));
         }
+        
         if (layerId === 'branches') {
-            // Distribute across two canopy arcs for even spacing
-            const primaryCount = Math.ceil(conceptCount * 0.6);
-            const secondaryCount = conceptCount - primaryCount;
-            const topArc = this.generateArcPositions(500, 290, 360, 120, 210, -30, primaryCount, 10, 22);
-            const midArc = this.generateArcPositions(500, 340, 320, 110, 200, -20, secondaryCount, 10, 22);
-            return [...topArc, ...midArc];
+            // Position within and around the foliage clusters
+            const branchPositions = [
+                // Main foliage clusters
+                { x: 350, y: 200 }, { x: 650, y: 200 }, { x: 500, y: 180 },
+                // Secondary foliage areas
+                { x: 280, y: 240 }, { x: 720, y: 240 }, { x: 420, y: 220 }, { x: 580, y: 220 },
+                // Smaller clusters and branch endpoints
+                { x: 320, y: 270 }, { x: 680, y: 270 }, { x: 450, y: 200 }
+            ];
+            return branchPositions.slice(0, conceptCount).map(pos => ({ ...pos, radius: 22 }));
         }
+        
         return [];
     }
 

@@ -39,83 +39,121 @@
             <!-- Tree Visualization -->
             <div class="tree-visual">
                 <svg class="tree-diagram" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Tree Stick Figure -->
+                    <!-- Realistic Tree -->
                     <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                refX="0" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#8B4513" />
-                        </marker>
+                        <radialGradient id="trunkGradient" cx="30%" cy="30%" r="70%">
+                            <stop offset="0%" style="stop-color:#A0522D;stop-opacity:1" />
+                            <stop offset="70%" style="stop-color:#8B4513;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="branchGradient" cx="30%" cy="30%" r="70%">
+                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="rootGradient" cx="50%" cy="30%" r="70%">
+                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#654321;stop-opacity:0.6" />
+                        </radialGradient>
+                        <radialGradient id="foliageGradient1" cx="30%" cy="20%" r="80%">
+                            <stop offset="0%" style="stop-color:#ADFF2F;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#32CD32;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.7" />
+                        </radialGradient>
+                        <radialGradient id="foliageGradient2" cx="40%" cy="25%" r="75%">
+                            <stop offset="0%" style="stop-color:#98FB98;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#32CD32;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.7" />
+                        </radialGradient>
                     </defs>
                     
                     <!-- Ground Line -->
-                    <line x1="0" y1="700" x2="1000" y2="700" stroke="#8B7355" stroke-width="4" opacity="0.6"/>
+                    <rect x="0" y="695" width="1000" height="10" fill="#8B7355" opacity="0.3"/>
                     
                     <!-- Root System (Underground) -->
-                    <g stroke="#8B4513" stroke-width="3" fill="none" opacity="0.7">
-                        <!-- Main roots -->
-                        <path d="M 500 700 L 350 750" stroke-linecap="round"/>
-                        <path d="M 500 700 L 650 750" stroke-linecap="round"/>
-                        <path d="M 500 700 L 200 730" stroke-linecap="round"/>
-                        <path d="M 500 700 L 800 730" stroke-linecap="round"/>
+                    <g opacity="0.8">
+                        <!-- Major roots with organic curves -->
+                        <path d="M 500 700 Q 400 730 250 750 Q 200 760 150 770" 
+                              stroke="url(#rootGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <path d="M 500 700 Q 600 730 750 750 Q 800 760 850 770" 
+                              stroke="url(#rootGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <path d="M 500 700 Q 450 740 350 760 Q 300 770 280 780" 
+                              stroke="url(#rootGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <path d="M 500 700 Q 550 740 650 760 Q 700 770 720 780" 
+                              stroke="url(#rootGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
                         
-                        <!-- Secondary roots -->
-                        <path d="M 350 750 L 300 770" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M 350 750 L 400 770" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M 650 750 L 600 770" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M 650 750 L 700 770" stroke-width="2" stroke-linecap="round"/>
-                        
-                        <!-- Smaller rootlets -->
-                        <path d="M 200 730 L 150 750" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M 200 730 L 180 760" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M 800 730 L 850 750" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M 800 730 L 820 760" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Smaller root branches -->
+                        <path d="M 350 740 Q 320 750 300 765" 
+                              stroke="url(#rootGradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 650 740 Q 680 750 700 765" 
+                              stroke="url(#rootGradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 480 720 Q 460 740 440 750" 
+                              stroke="url(#rootGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M 520 720 Q 540 740 560 750" 
+                              stroke="url(#rootGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
                     </g>
                     
-                    <!-- Main Trunk -->
-                    <line x1="500" y1="700" x2="500" y2="400" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
+                    <!-- Main Trunk with natural curves -->
+                    <path d="M 485 700 Q 490 650 485 600 Q 480 550 485 500 Q 490 450 495 400 Q 500 350 505 300 Q 510 350 515 400 Q 520 450 515 500 Q 520 550 515 600 Q 510 650 515 700 Z" 
+                          fill="url(#trunkGradient)" stroke="#654321" stroke-width="1"/>
                     
-                    <!-- Main Branches -->
-                    <g stroke="#8B4513" stroke-width="6" fill="none" stroke-linecap="round">
-                        <!-- Primary branches -->
-                        <path d="M 500 450 L 350 350"/>
-                        <path d="M 500 450 L 650 350"/>
-                        <path d="M 500 420 L 380 320"/>
-                        <path d="M 500 420 L 620 320"/>
+                    <!-- Trunk texture lines -->
+                    <g stroke="#654321" stroke-width="1" opacity="0.6" fill="none">
+                        <path d="M 490 680 Q 492 620 490 560 Q 488 500 490 440"/>
+                        <path d="M 500 680 Q 502 620 500 560 Q 498 500 500 440"/>
+                        <path d="M 510 680 Q 508 620 510 560 Q 512 500 510 440"/>
+                    </g>
+                    
+                    <!-- Main Branch Structure -->
+                    <g>
+                        <!-- Primary large branches -->
+                        <path d="M 495 400 Q 450 370 380 320 Q 320 280 280 240" 
+                              stroke="url(#branchGradient)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M 505 400 Q 550 370 620 320 Q 680 280 720 240" 
+                              stroke="url(#branchGradient)" stroke-width="12" fill="none" stroke-linecap="round"/>
                         
                         <!-- Secondary branches -->
-                        <path d="M 350 350 L 250 280" stroke-width="4"/>
-                        <path d="M 350 350 L 300 250" stroke-width="4"/>
-                        <path d="M 650 350 L 750 280" stroke-width="4"/>
-                        <path d="M 650 350 L 700 250" stroke-width="4"/>
+                        <path d="M 490 350 Q 440 330 390 290 Q 350 260 320 220" 
+                              stroke="url(#branchGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <path d="M 510 350 Q 560 330 610 290 Q 650 260 680 220" 
+                              stroke="url(#branchGradient)" stroke-width="8" fill="none" stroke-linecap="round"/>
                         
                         <!-- Upper branches -->
-                        <path d="M 500 400 L 450 300" stroke-width="4"/>
-                        <path d="M 500 400 L 550 300" stroke-width="4"/>
-                        <path d="M 500 380 L 480 280" stroke-width="3"/>
-                        <path d="M 500 380 L 520 280" stroke-width="3"/>
+                        <path d="M 495 320 Q 460 300 420 270 Q 390 250 370 220" 
+                              stroke="url(#branchGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <path d="M 505 320 Q 540 300 580 270 Q 610 250 630 220" 
+                              stroke="url(#branchGradient)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Central top branches -->
+                        <path d="M 500 300 Q 480 280 460 250 Q 450 230 440 200" 
+                              stroke="url(#branchGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M 500 300 Q 520 280 540 250 Q 550 230 560 200" 
+                              stroke="url(#branchGradient)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Smaller branching -->
+                        <path d="M 380 320 Q 360 300 340 280" 
+                              stroke="url(#branchGradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <path d="M 620 320 Q 640 300 660 280" 
+                              stroke="url(#branchGradient)" stroke-width="4" fill="none" stroke-linecap="round"/>
                     </g>
                     
-                    <!-- Smaller Twigs -->
-                    <g stroke="#654321" stroke-width="2" fill="none" stroke-linecap="round">
-                        <!-- Left side twigs -->
-                        <path d="M 250 280 L 200 250"/>
-                        <path d="M 250 280 L 220 320"/>
-                        <path d="M 300 250 L 280 200"/>
-                        <path d="M 300 250 L 330 220"/>
+                    <!-- Foliage Clusters -->
+                    <g opacity="0.9">
+                        <!-- Main canopy clusters -->
+                        <ellipse cx="350" cy="200" rx="90" ry="70" fill="url(#foliageGradient1)" transform="rotate(-15 350 200)"/>
+                        <ellipse cx="650" cy="200" rx="90" ry="70" fill="url(#foliageGradient2)" transform="rotate(15 650 200)"/>
+                        <ellipse cx="500" cy="180" rx="80" ry="60" fill="url(#foliageGradient1)"/>
                         
-                        <!-- Right side twigs -->
-                        <path d="M 750 280 L 800 250"/>
-                        <path d="M 750 280 L 780 320"/>
-                        <path d="M 700 250 L 720 200"/>
-                        <path d="M 700 250 L 670 220"/>
+                        <!-- Secondary foliage -->
+                        <ellipse cx="280" cy="240" rx="70" ry="55" fill="url(#foliageGradient2)" transform="rotate(-20 280 240)"/>
+                        <ellipse cx="720" cy="240" rx="70" ry="55" fill="url(#foliageGradient1)" transform="rotate(20 720 240)"/>
+                        <ellipse cx="420" cy="220" rx="60" ry="45" fill="url(#foliageGradient2)" transform="rotate(-10 420 220)"/>
+                        <ellipse cx="580" cy="220" rx="60" ry="45" fill="url(#foliageGradient1)" transform="rotate(10 580 220)"/>
                         
-                        <!-- Top twigs -->
-                        <path d="M 450 300 L 420 270"/>
-                        <path d="M 450 300 L 430 330"/>
-                        <path d="M 550 300 L 580 270"/>
-                        <path d="M 550 300 L 570 330"/>
-                        <path d="M 480 280 L 460 250"/>
-                        <path d="M 520 280 L 540 250"/>
+                        <!-- Smaller clusters -->
+                        <ellipse cx="320" cy="270" rx="50" ry="40" fill="url(#foliageGradient1)" transform="rotate(-25 320 270)"/>
+                        <ellipse cx="680" cy="270" rx="50" ry="40" fill="url(#foliageGradient2)" transform="rotate(25 680 270)"/>
+                        <ellipse cx="450" cy="200" rx="45" ry="35" fill="url(#foliageGradient1)"/>
+                        <ellipse cx="550" cy="200" rx="45" ry="35" fill="url(#foliageGradient2)"/>
                     </g>
                     
                     <!-- Concept Node Containers -->
