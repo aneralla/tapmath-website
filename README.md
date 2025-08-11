@@ -150,3 +150,4 @@ Potential additions for future versions:
 ## 📝 License
 
 This educational project is designed for learning purposes. Video content is linked from educational YouTube channels - please respect their individual licensing terms.
+
